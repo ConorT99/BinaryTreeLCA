@@ -9,16 +9,19 @@ public class LCA {
 	BT binaryTree;
 
   class BT {
-		int val;
-		Node left;
-		Node right;
 
-		 public Node(int val) {
-			 this.val = val;
-			 this.left = null;
-			 this.right = null;
-		}
+	  class Node {
+  		int val;
+  		Node left;
+  		Node right;
 
+  		 public Node(int val) {
+  			 this.val = val;
+  			 this.left = null;
+  			 this.right = null;
+  		}
+
+	  }
 		// Instantiate root node of Binary Tree
 		Node root;
 
@@ -68,7 +71,6 @@ public class LCA {
 		this.pointA = pointA;
 		this.pointB = pointB;
 		this.binaryTree = binaryTree;
-		this.lowestCommonAncestor = lowestCommonAncestor;
 	}
 
 	public int findLowestCommonAncestor() {
