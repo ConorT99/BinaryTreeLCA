@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 package btLCA;
 
 public class LCA {
@@ -37,6 +39,32 @@ public class LCA {
 
 	public int returnLCA() {
 		return lowestCommonAncestor;
+	}
+
+	public DAGNode findLCADAG(DAGNode root, DAGNode node1, DAGNode node2) {
+		if(root == null) {
+			return null;
+		} else if(root == node1) {
+			return node1;
+		} else if(root == node2) {
+			return node2;
+		}
+
+		if(node1.val == node2.val) {
+			return node1;
+		}
+
+		ArrayList<DAGNode> lcaList = new ArrayList<DAGNode>();
+		if(node1.parentList.size() == 0 || node2.parentList.size() == 0) {
+			return null;
+		}
+		for(int i = 0; i < node1.parentList.size(); i++) {
+			for(int j = 0; j < node2.parentList.size(); j++) {
+				if(node1.parentList.get(i).val == node2.parentList.get(j).val) {
+					lcaList.add(node1.parentList.get(i));
+				}
+			}
+		}
 	}
 
 }
