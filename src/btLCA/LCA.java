@@ -48,9 +48,7 @@ public class LCA {
 			return node1;
 		} else if(root == node2) {
 			return node2;
-		}
-
-		if(node1.val == node2.val) {
+		} else if(node1.val == node2.val) {
 			return node1;
 		}
 
@@ -58,6 +56,7 @@ public class LCA {
 		if(node1.parentList.size() == 0 || node2.parentList.size() == 0) {
 			return null;
 		}
+
 		for(int i = 0; i < node1.parentList.size(); i++) {
 			for(int j = 0; j < node2.parentList.size(); j++) {
 				if(node1.parentList.get(i).val == node2.parentList.get(j).val) {
@@ -65,6 +64,22 @@ public class LCA {
 				}
 			}
 		}
+
+		if(lcaList.size() == 0) {
+			if(a.val > b.val) {
+				lcaList.add(findLCADAG(root, a.parentList.get(0), b));
+			} else {
+				lcaList.add(findLCADAG(root, a, b.parentList.get(0)));
+			}
+		}
+
+		DAGNode dagLCA = lcaList.get(0);
+		for(int i = 0; i < lcaList.size(); i++) {
+			if(dagLCA < lcaList.get(i).val) {
+				dagLCA = lcaList.get(i);
+			}
+		}
+		return dagLCA;
 	}
 
 }
