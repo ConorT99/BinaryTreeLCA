@@ -21,8 +21,8 @@ class LCATest {
 		bt.insert(11);
 		bt.insert(13);
 
-		/*			    7
-		 * 			 /    \
+		/*			 			   7
+		 * 			 			/    \
 		 *          5       9
 		 *        /   \   /   \
 		 *      3      6 8     12
@@ -70,7 +70,7 @@ class LCATest {
 		assertEquals(12, bt.right.right.val);
 	}
 
-	@Test 
+	@Test
 	void testReturnLCA() {
 		BT bt = new BT();
 		bt.insert(7);
@@ -84,9 +84,9 @@ class LCATest {
 		bt.insert(12);
 		bt.insert(11);
 		bt.insert(13);
-		
-		/*			    7
-		 * 			 /    \
+
+		/*			   			 7
+		 * 			 			/    \
 		 *          5       9
 		 *        /   \   /   \
 		 *      3      6 8     12

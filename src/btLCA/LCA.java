@@ -66,16 +66,16 @@ public class LCA {
 		}
 
 		if(lcaList.size() == 0) {
-			if(a.val > b.val) {
-				lcaList.add(findLCADAG(root, a.parentList.get(0), b));
+			if(node1.val > node2.val) {
+				lcaList.add(findLCADAG(root, node1.parentList.get(0), node2));
 			} else {
-				lcaList.add(findLCADAG(root, a, b.parentList.get(0)));
+				lcaList.add(findLCADAG(root, node1, node2.parentList.get(0)));
 			}
 		}
 
 		DAGNode dagLCA = lcaList.get(0);
 		for(int i = 0; i < lcaList.size(); i++) {
-			if(dagLCA < lcaList.get(i).val) {
+			if(dagLCA.val < lcaList.get(i).val) {
 				dagLCA = lcaList.get(i);
 			}
 		}
