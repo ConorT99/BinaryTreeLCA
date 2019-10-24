@@ -98,5 +98,55 @@ class LCATest {
 		 LCA lca = new LCA(5, 9, bt);
 		 assertEquals(lca.findLowestCommonAncestor(), lca.returnLCA());
 	}
+	
+	@Test
+	void testNullDAGNode() {
+		DAG.DAGNode node = null;
+		assertNull(node);
+	}
 
+	@Test
+	void testOneNodeDAG() {
+		DAG.DAGNode root = new DAG.DAGNode(1);
+		DAG.DAGNode node1 = new DAG.DAGNode(1);
+		DAG.DAGNode node2 = new DAG.DAGNode(1);
+		assertEquals(LCA.findLCADAG(root, node1, node2).val, 1);
+	}
+
+	@Test
+	void testDAG() {
+		DAG.DAGNode root = new DAG.DAGNode(1);
+        DAG.DAGNode a = new DAG.DAGNode(2);
+        DAG.DAGNode b = new DAG.DAGNode(3);
+        DAG.DAGNode c = new DAG.DAGNode(4);
+        DAG.DAGNode d = new DAG.DAGNode(5);
+
+        // The below test ought to return null as all values provided are null
+        assertNull(LCA.findLCADAG(null, null, null));
+
+        // The below test ought to return null as it's not possible to find the LCA of nodes
+        // Not in the DAG
+        assertNull(LCA.findLCADAG(root, new DAG.DAGNode(6), new DAG.DAGNode(7)));
+        root.childList.add(a);
+        root.childList.add(b);
+        root.childList.add(c);
+        root.childList.add(d);
+        a.childList.add(c);
+        a.parentList.add(root);
+        b.childList.add(c);
+        b.childList.add(d);
+        b.parentList.add(root);
+        c.childList.add(d);
+        c.parentList.add(a);
+        c.parentList.add(b);
+        c.parentList.add(root);
+        d.parentList.add(b);
+        d.parentList.add(c);
+        d.parentList.add(root);
+
+        assertEquals(LCA.findLCADAG(root, root, b).val, 1);
+        assertEquals(LCA.findLCADAG(root, d, d).val, 5);
+        assertEquals(LCA.findLCADAG(root, a, d).val, 1);
+
+	}
 }
